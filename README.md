@@ -5,26 +5,25 @@ java -jar /opt/jrebel.jar -set-remote-password 12345678
  
 #2、修改catalina.sh文件
 指定debug端口、jrebel热部署端口等 ，添加
-export JAVA_OPTS="-javaagent:/opt/jrebel.jar -Drebel.remoting_plugin=true -Drebel.remoting_port=8000 -agentlib:jdwp=transport=dt_socket,address=58200,suspend=n,server=y"
+	export JAVA_OPTS="-javaagent:/opt/jrebel.jar -Drebel.remoting_plugin=true -Drebel.remoting_port=8000 -agentlib:jdwp=transport=dt_socket,address=58200,suspend=n,server=y"
  
 #3、修改tomcat配置
 配置支持maven cargo:deploy 远程部署war
-modify tomcat setting
-modify server.xml  for manager web page
-sed -i '/<\/Host>/i <Context path=\"/manager\" docBase=\"/opt/apache-tomcat-8.0.33/webapps/manager\" debug=\"0\" privileged=\"true\"/>' /opt/a
-pache-tomcat-8.0.33/conf/server.xml
+	modify tomcat setting
+	modify server.xml  for manager web page
+	sed -i '/<\/Host>/i <Context path=\"/manager\" docBase=\"/opt/apache-tomcat-8.0.33/webapps/manager\" debug=\"0\" privileged=\"true\"/>' /opt/apache-tomcat-8.0.33/conf/server.xml
  
-modify tomcat-users.xml for deploy role auth
-sed -i '/<\/tomcat-users>/i \<role rolename="admin"/>' /opt/apache-tomcat-8.0.33/conf/tomcat-users.xml
-sed -i '/<\/tomcat-users>/i \<user username="admin" password="admin" roles="admin,manager-script,manager-gui"/>' /opt/apache-tomcat-8.0.33/con
+	modify tomcat-users.xml for deploy role auth
+	sed -i '/<\/tomcat-users>/i \<role rolename="admin"/>' /opt/apache-tomcat-8.0.33/conf/tomcat-users.xml
+	sed -i '/<\/tomcat-users>/i \<user username="admin" password="admin" roles="admin,manager-script,manager-gui"/>' /opt/apache-tomcat-8.0.33/con
 f/tomcat-users.xml
  
-modify web.xml for the war more than 50M
-sed -i 's/52428800/-1/g' /opt/apache-tomcat-8.0.33/webapps/manager/WEB-INF/web.xml 
+	modify web.xml for the war more than 50M
+	sed -i 's/52428800/-1/g' /opt/apache-tomcat-8.0.33/webapps/manager/WEB-INF/web.xml 
  
 #4、在Intellij IDEA 配置remote debug
 #4.1）自动编译java文件
-Preferences->Build,Execution,Deployment->Compiler->Make project automatically
+	Preferences->Build,Execution,Deployment->Compiler->Make project automatically
  手动点编译（在Intellij IDEA 左上，选择 Tomcat 框的左边，向下的绿箭头图标）
 #4.2）配置remote
       Preferences->Jrebel->Remote servers
@@ -45,13 +44,13 @@ Preferences->Build,Execution,Deployment->Compiler->Make project automatically
 在Intellij IDEA 左上，选择 Tomcat 框（选择刚配置的remote）的右边，小虫子是Remote debug按钮,云上的绿火箭是热部署手工同步按钮。
 
 #build docker image
-docker build -t debuger .
+	docker build -t debuger .
 
 #generate docker container
-docker run -d -p 8080:8080 -p 8000:8000 -p 58200:58200 -e "container=container-debuger" --name container-debuger -h container-debuger debuger
+	docker run -d -p 8080:8080 -p 8000:8000 -p 58200:58200 -e "container=container-debuger" --name container-debuger -h container-debuger debuger
 
 #参考
-https://github.com/horklim/doc/wiki/HOW-TO-REMOTELY-DEBUG-APPLICATION-RUNNING-ON-TOMCAT-FROM-WITHIN-INTELLIJ-IDEA
-http://manuals.zeroturnaround.com/jrebel/remoteserver/intellij.html
-http://manuals.zeroturnaround.com/jrebel/remoteserver/intellij.html#intellijremoteserver
+	https://github.com/horklim/doc/wiki/HOW-TO-REMOTELY-DEBUG-APPLICATION-RUNNING-ON-TOMCAT-FROM-WITHIN-INTELLIJ-IDEA
+	http://manuals.zeroturnaround.com/jrebel/remoteserver/intellij.html
+	http://manuals.zeroturnaround.com/jrebel/remoteserver/intellij.html#intellijremoteserver
 
