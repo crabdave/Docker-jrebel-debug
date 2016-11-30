@@ -46,3 +46,7 @@ docker build -t debuger .
 docker run -d -p 8080:8080 -p 8000:8000 -p 58200:58200 -e "container=container-debuger" --name container-debuger -h container-debuger debuger
 
 
+https://github.com/horklim/doc/wiki/HOW-TO-REMOTELY-DEBUG-APPLICATION-RUNNING-ON-TOMCAT-FROM-WITHIN-INTELLIJ-IDEA
+http://manuals.zeroturnaround.com/jrebel/remoteserver/intellij.html
+http://manuals.zeroturnaround.com/jrebel/remoteserver/intellij.html#intellijremoteserver
+
