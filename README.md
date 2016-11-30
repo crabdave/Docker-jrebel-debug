@@ -15,8 +15,7 @@
  
 	modify tomcat-users.xml for deploy role auth
 	sed -i '/<\/tomcat-users>/i \<role rolename="admin"/>' /opt/apache-tomcat-8.0.33/conf/tomcat-users.xml
-	sed -i '/<\/tomcat-users>/i \<user username="admin" password="admin" roles="admin,manager-script,manager-gui"/>' /opt/apache-tomcat-8.0.33/con
-f/tomcat-users.xml
+	sed -i '/<\/tomcat-users>/i \<user username="admin" password="admin" roles="admin,manager-script,manager-gui"/>' /opt/apache-tomcat-8.0.33/conf/tomcat-users.xml
  
 	modify web.xml for the war more than 50M
 	sed -i 's/52428800/-1/g' /opt/apache-tomcat-8.0.33/webapps/manager/WEB-INF/web.xml 
