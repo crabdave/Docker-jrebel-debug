@@ -50,6 +50,8 @@
 
 #参考
 https://github.com/horklim/doc/wiki/HOW-TO-REMOTELY-DEBUG-APPLICATION-RUNNING-ON-TOMCAT-FROM-WITHIN-INTELLIJ-IDEA
+
 http://manuals.zeroturnaround.com/jrebel/remoteserver/intellij.html
+
 http://manuals.zeroturnaround.com/jrebel/remoteserver/intellij.html#intellijremoteserver
 
